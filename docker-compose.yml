@@ -1,0 +1,20 @@
+services:
+
+  controlnode:
+    build: control-node/
+    working_dir: /playbooks
+    user: 'root'
+    volumes:
+      - ./secrets:/secrets
+      - ./playbooks:/playbooks
+    command: 'tail -f /dev/null'
+  
+  managedhost-alpine:
+    build: managed-hosts/alpine/
+    restart: unless-stopped
+    volumes:
+      - ./secrets/id_rsa.pub:/root/.ssh/authorized_keys
+    ports:
+    - 3210:3000
+    environment:
+      - SSH_ENBABLE_ROOT=true
