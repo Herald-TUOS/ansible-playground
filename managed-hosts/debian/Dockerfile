@@ -1,17 +1,18 @@
-# https://github.com/panubo/docker-sshd
-FROM alpine:latest
+FROM debian:bullseye
 
-RUN apk update && \
-    apk add bash git openssh rsync augeas shadow && \
+RUN apt update
+
+RUN apt update && \
+    apt install -y bash git openssh-server openssh-client rsync augeas-tools && \
     deluser $(getent passwd 33 | cut -d: -f1) && \
     delgroup $(getent group 33 | cut -d: -f1) 2>/dev/null || true && \
     mkdir -p ~root/.ssh /etc/authorized_keys && chmod 700 ~root/.ssh/ && \
     augtool 'set /files/etc/ssh/sshd_config/AuthorizedKeysFile ".ssh/authorized_keys /etc/authorized_keys/%u"' && \
-    echo -e "Port 22\n" >> /etc/ssh/sshd_config && \
+    echo "Port 22" >> /etc/ssh/sshd_config && \
     cp -a /etc/ssh /etc/ssh.cache && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apt/*
 
-RUN apk add --update --no-cache python3
+RUN apt install -y python3
 
 EXPOSE 22
 

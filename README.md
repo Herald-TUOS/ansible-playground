@@ -8,7 +8,7 @@ A dockerized container for learning ansible
 # Playground nodes
 
 -  A control node container running python slim official image
--  One managed host: Alpine linux
+-  Two managed hosts: Alpine linux and Debian
 
 # Config
 

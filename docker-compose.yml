@@ -20,4 +20,14 @@ services:
     ports:
     - 3210:3000
     environment:
-      - SSH_ENBABLE_ROOT=true
+      - SSH_ENABLE_ROOT=true
+
+  managedhost-debian:
+    build: managed-hosts/debian/
+    restart: unless-stopped
+    volumes:
+      - ./secrets/id_rsa.pub:/root/.ssh/authorized_keys
+    ports:
+    - 4444:3000
+    environment:
+      - SSH_ENABLE_ROOT=true    

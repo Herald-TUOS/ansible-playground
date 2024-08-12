@@ -1,1 +1,2 @@
 alpine-example-com ansible_host=managedhost-alpine ansible_connection=ssh
+debian-example-com ansible_host=managedhost-debian ansible_connection=ssh
