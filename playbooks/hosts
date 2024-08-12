@@ -1,0 +1,1 @@
+alpine-example-com ansible_host=managedhost-alpine ansible_connection=ssh

@@ -1,12 +1,15 @@
 services:
 
   controlnode:
-    build: control-node/
+    build:
+      context: control-node/
+    image: ansible:controlnode
     working_dir: /playbooks
     user: 'root'
     volumes:
       - ./secrets:/secrets
       - ./playbooks:/playbooks
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     command: 'tail -f /dev/null'
   
   managedhost-alpine:
