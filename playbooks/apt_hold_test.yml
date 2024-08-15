@@ -1,0 +1,10 @@
+- hosts: debian-example-com
+  become: true
+  become_method: su
+  tasks:
+
+  - name: upgrade all packages
+    apt:
+      update_cache: yes
+      upgrade: yes
+      autoremove: yes

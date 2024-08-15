@@ -1,0 +1,10 @@
+- hosts: all
+  become: true
+  become_method: su
+  tasks:
+
+  - name: install nano
+    package:
+      name: nano
+      state: latest
+      update_cache: yes

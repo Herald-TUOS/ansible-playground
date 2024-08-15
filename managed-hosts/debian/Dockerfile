@@ -14,9 +14,13 @@ RUN apt update && \
 
 RUN apt install -y python3
 
+# for testing apt hold
+RUN apt install -y --allow-downgrades dpkg=1.20.10
+RUN apt-mark hold dpkg
+
 EXPOSE 22
 
-COPY ../docker-entrypoint.sh /entry.sh
+COPY docker-entrypoint.sh /entry.sh
 RUN chmod a+x /entry.sh
 ENTRYPOINT ["/entry.sh"]
 

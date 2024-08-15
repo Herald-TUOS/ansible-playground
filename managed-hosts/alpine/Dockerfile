@@ -15,7 +15,7 @@ RUN apk add --update --no-cache python3
 
 EXPOSE 22
 
-COPY ../docker-entrypoint.sh /entry.sh
+COPY docker-entrypoint.sh /entry.sh
 RUN chmod a+x /entry.sh
 ENTRYPOINT ["/entry.sh"]
 

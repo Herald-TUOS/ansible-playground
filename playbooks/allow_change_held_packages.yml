@@ -1,0 +1,17 @@
+- hosts: debian-example-com
+  become: true
+  become_method: su
+  tasks:
+
+  - name: unhold package
+    shell: apt-mark unhold dpkg
+
+  - name: upgrade all packages
+    apt:
+      update_cache: true
+      upgrade: 'yes'
+      autoremove: true
+      name: 'dpkg'
+  
+  - name: revert back to hold package
+    shell: apt-mark hold dpkg
